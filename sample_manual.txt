@@ -1,0 +1,370 @@
+MANUALE TECNICO - DISPOSITIVO SMART HOME X1
+==========================================
+
+Versione: 2.0
+Data: Novembre 2025
+Produttore: SmartTech Solutions
+
+
+INDICE
+======
+
+1. Introduzione
+2. Specifiche Tecniche
+3. Installazione Hardware
+4. Configurazione WiFi
+5. Configurazione App Mobile
+6. Reset e Ripristino
+7. Manutenzione
+8. Risoluzione Problemi
+9. Garanzia e Supporto
+
+
+==========================================
+CAPITOLO 1 - INTRODUZIONE
+==========================================
+
+Benvenuto nel manuale del Dispositivo Smart Home X1.
+
+Il dispositivo X1 è un hub intelligente per la gestione della domotica domestica.
+Caratteristiche principali:
+- Connettività WiFi dual-band (2.4GHz e 5GHz)
+- Bluetooth 5.0
+- 4 porte USB per periferiche
+- Controllo vocale integrato
+- Compatibile con Alexa, Google Home, Apple HomeKit
+
+Prima di iniziare l'installazione, assicurarsi di avere:
+- Router WiFi funzionante con accesso internet
+- Smartphone iOS 14+ o Android 10+
+- Account email valido
+- Credenziali WiFi (nome rete e password)
+
+
+==========================================
+CAPITOLO 2 - SPECIFICHE TECNICHE
+==========================================
+
+HARDWARE
+--------
+- Processore: ARM Cortex-A53 quad-core 1.5 GHz
+- RAM: 2GB DDR4
+- Storage: 16GB eMMC
+- WiFi: 802.11 b/g/n/ac dual-band
+- Bluetooth: 5.0 BLE
+- Porte: 4x USB 2.0, 1x Ethernet Gigabit, 1x HDMI
+- Alimentazione: 12V 2A (incluso)
+
+DIMENSIONI
+----------
+- Larghezza: 120mm
+- Profondità: 120mm
+- Altezza: 35mm
+- Peso: 280g
+
+CONDIZIONI OPERATIVE
+-------------------
+- Temperatura: 0°C a 40°C
+- Umidità: 10% - 90% (senza condensa)
+- Altitudine: fino a 2000m
+
+
+==========================================
+CAPITOLO 3 - INSTALLAZIONE HARDWARE
+==========================================
+
+PASSO 1: UNBOXING
+------------------
+Verificare che la confezione contenga:
+1. Dispositivo Smart Home X1
+2. Alimentatore 12V 2A
+3. Cavo Ethernet (1m)
+4. Guida rapida
+5. Certificato di garanzia
+
+PASSO 2: POSIZIONAMENTO
+------------------------
+Posizionare il dispositivo in un luogo:
+- Centrale rispetto alla casa (per migliore copertura WiFi)
+- Ventilato (lasciare 10cm di spazio sui lati)
+- Lontano da fonti di calore
+- Vicino alla presa elettrica
+
+ATTENZIONE: Non coprire le ventole di raffreddamento!
+
+PASSO 3: COLLEGAMENTI
+----------------------
+1. Collegare il cavo di alimentazione al dispositivo
+2. Collegare l'alimentatore alla presa elettrica
+3. (Opzionale) Collegare cavo Ethernet al router
+4. Attendere che il LED frontale diventi BLU fisso (circa 60 secondi)
+
+LED STATUS:
+- BLU fisso: Dispositivo pronto
+- BLU lampeggiante: Avvio in corso
+- ROSSO fisso: Errore hardware
+- VERDE lampeggiante: Connessione in corso
+
+
+==========================================
+CAPITOLO 4 - CONFIGURAZIONE WiFi
+==========================================
+
+PREREQUISITI
+------------
+- Dispositivo acceso (LED BLU fisso)
+- Smartphone connesso al WiFi domestico
+- App "SmartHome X1" installata (disponibile su App Store e Google Play)
+
+PROCEDURA CONFIGURAZIONE
+------------------------
+
+STEP 1: MODALITÀ PAIRING
+--------------------------
+1. Tenere premuto il pulsante RESET per 3 secondi
+2. Rilasciare quando il LED diventa VERDE lampeggiante
+3. Il dispositivo creerà una rete WiFi temporanea: "SmartHome-X1-Setup"
+
+STEP 2: CONNESSIONE APP
+------------------------
+1. Aprire l'app "SmartHome X1"
+2. Toccare "Aggiungi Dispositivo"
+3. Selezionare "X1 Hub"
+4. Seguire le istruzioni a schermo
+5. Quando richiesto, connettersi alla rete "SmartHome-X1-Setup"
+6. Tornare all'app
+
+STEP 3: CONFIGURAZIONE RETE
+----------------------------
+1. Selezionare la propria rete WiFi dall'elenco
+2. Inserire la password WiFi
+3. Toccare "Connetti"
+4. Attendere 30-60 secondi
+5. Il LED diventerà BLU fisso quando connesso
+
+NOTA: Se la connessione fallisce:
+- Verificare che la password WiFi sia corretta
+- Assicurarsi che il router supporti dispositivi 2.4GHz
+- Controllare che il router non abbia filtri MAC attivi
+
+RISOLUZIONE PROBLEMI WiFi
+--------------------------
+Problema: LED ROSSO lampeggiante dopo configurazione
+Soluzione:
+- Verificare copertura WiFi nella posizione del dispositivo
+- Avvicinare temporaneamente il dispositivo al router
+- Riavviare il router
+- Ripetere la procedura di configurazione
+
+Problema: Dispositivo non appare nell'elenco WiFi
+Soluzione:
+- Tenere premuto RESET per 10 secondi (reset completo)
+- Ripetere STEP 1
+
+
+==========================================
+CAPITOLO 5 - CONFIGURAZIONE APP MOBILE
+==========================================
+
+CREAZIONE ACCOUNT
+-----------------
+1. Aprire app "SmartHome X1"
+2. Toccare "Registrati"
+3. Inserire email e password
+4. Verificare email (controllare spam)
+5. Effettuare login
+
+AGGIUNTA DISPOSITIVI
+--------------------
+Dopo aver configurato il WiFi (Capitolo 4):
+
+1. Nella schermata Home dell'app, toccare "+"
+2. Selezionare tipo di dispositivo da aggiungere
+3. Seguire procedura guidata
+4. Assegnare un nome al dispositivo
+5. Assegnare a una stanza (opzionale)
+
+CREAZIONE AUTOMAZIONI
+----------------------
+1. Toccare tab "Automazioni"
+2. Toccare "+" per creare nuova automazione
+3. Selezionare trigger (es: "Quando torno a casa")
+4. Selezionare azioni (es: "Accendi luci")
+5. Salvare automazione
+
+
+==========================================
+CAPITOLO 6 - RESET E RIPRISTINO
+==========================================
+
+TIPI DI RESET
+-------------
+
+1. SOFT RESET (Riavvio)
+   - Utilizzare quando: il dispositivo è lento o non risponde
+   - Procedura: Tenere premuto pulsante POWER per 5 secondi
+   - Effetti: Riavvio dispositivo, configurazioni mantenute
+   - Tempo: 60 secondi
+
+2. RESET CONFIGURAZIONE WiFi
+   - Utilizzare quando: cambi router o password WiFi
+   - Procedura:
+     a) Tenere premuto pulsante RESET per 8 secondi
+     b) Rilasciare quando LED diventa ARANCIONE
+     c) Riconfigurare WiFi (vedi Capitolo 4)
+   - Effetti: Solo impostazioni WiFi cancellate
+   - Tempo: 2 minuti
+
+3. FACTORY RESET (Ripristino Totale)
+   - Utilizzare quando: vendita dispositivo o problemi gravi
+   - Procedura:
+     a) Spegnere dispositivo
+     b) Tenere premuto RESET + POWER contemporaneamente
+     c) Rilasciare POWER dopo 3 secondi
+     d) Continuare a tenere RESET per altri 10 secondi
+     e) Rilasciare quando LED lampeggia ROSSO-VERDE
+   - Effetti: TUTTI i dati cancellati, ritorna a condizioni di fabbrica
+   - Tempo: 5 minuti
+
+ATTENZIONE FACTORY RESET:
+- Backup delle configurazioni verrà perso
+- Automazioni cancellate
+- Dispositivi collegati da ri-associare
+- Account utente NON cancellato (solo sul cloud)
+
+BACKUP CONFIGURAZIONI
+---------------------
+Prima di un reset, salvare le configurazioni:
+
+1. Aprire app SmartHome X1
+2. Menu → Impostazioni
+3. Toccare "Backup"
+4. Toccare "Crea Backup Ora"
+5. Backup salvato sul cloud (associato al tuo account)
+
+RIPRISTINO DA BACKUP
+--------------------
+Dopo reset e riconfigurazione WiFi:
+
+1. Aprire app SmartHome X1
+2. Effettuare login con stesso account
+3. Menu → Impostazioni → Backup
+4. Selezionare backup da ripristinare
+5. Toccare "Ripristina"
+6. Attendere completamento (2-5 minuti)
+
+
+==========================================
+CAPITOLO 7 - MANUTENZIONE
+==========================================
+
+MANUTENZIONE ORDINARIA
+----------------------
+
+PULIZIA (ogni 3 mesi):
+- Spegnere dispositivo
+- Pulire esterno con panno morbido asciutto
+- NON usare liquidi o detergenti
+- Pulire ventole con aria compressa
+
+VERIFICA FIRMWARE (ogni mese):
+1. App → Impostazioni → Informazioni Dispositivo
+2. Verificare versione firmware
+3. Se disponibile update, toccare "Aggiorna"
+4. NON spegnere durante aggiornamento (10-15 minuti)
+
+BACKUP (ogni 6 mesi):
+- Creare backup configurazioni (vedi Capitolo 6)
+
+
+==========================================
+CAPITOLO 8 - RISOLUZIONE PROBLEMI
+==========================================
+
+PROBLEMA: Dispositivo non si accende
+CAUSA: Alimentazione
+SOLUZIONE:
+1. Verificare che alimentatore sia collegato
+2. Provare altra presa elettrica
+3. Verificare LED alimentatore (deve essere verde)
+4. Se persiste, contattare assistenza
+
+PROBLEMA: WiFi non si connette
+CAUSA: Password errata o interferenze
+SOLUZIONE:
+1. Verificare password WiFi corretta
+2. Riavviare router
+3. Avvicinare dispositivo a router
+4. Verificare che router supporti 2.4GHz
+5. Disabilitare temporaneamente filtro MAC su router
+
+PROBLEMA: App non trova dispositivo
+CAUSA: Dispositivo e smartphone su reti diverse
+SOLUZIONE:
+1. Verificare che smartphone sia su stessa rete WiFi
+2. Disabilitare VPN su smartphone
+3. Verificare che firewall router non blocchi dispositivo
+4. Provare con hotspot smartphone per test
+
+PROBLEMA: Dispositivo lento a rispondere
+CAUSA: Sovraccarico o memoria piena
+SOLUZIONE:
+1. Effettuare soft reset (vedi Capitolo 6)
+2. Rimuovere automazioni inutilizzate
+3. Aggiornare firmware
+4. Se persiste, factory reset
+
+
+==========================================
+CAPITOLO 9 - GARANZIA E SUPPORTO
+==========================================
+
+GARANZIA
+--------
+Il dispositivo è coperto da garanzia di 24 mesi dalla data di acquisto.
+
+La garanzia copre:
+- Difetti di fabbricazione
+- Malfunzionamenti hardware
+- Difetti materiali
+
+La garanzia NON copre:
+- Danni da uso improprio
+- Danni da caduta o liquidi
+- Modifiche non autorizzate
+- Usura normale
+
+SUPPORTO TECNICO
+---------------
+Email: support@smarttech-solutions.com
+Telefono: +39 02 1234 5678 (Lun-Ven 9-18)
+Chat: www.smarttech-solutions.com/support
+
+DOCUMENTAZIONE ONLINE
+---------------------
+Manuali aggiornati: www.smarttech-solutions.com/manuals
+Video tutorial: www.smarttech-solutions.com/videos
+FAQ: www.smarttech-solutions.com/faq
+Community Forum: forum.smarttech-solutions.com
+
+
+==========================================
+NOTE LEGALI
+==========================================
+
+© 2025 SmartTech Solutions. Tutti i diritti riservati.
+
+Questo documento può essere riprodotto solo per uso personale.
+Il contenuto è soggetto a modifiche senza preavviso.
+
+SmartHome X1 è un marchio registrato di SmartTech Solutions.
+
+Conforme a: CE, FCC, RoHS
+
+
+==========================================
+FINE MANUALE
+==========================================
+
+Per assistenza: support@smarttech-solutions.com
+Versione manuale: 2.0 - Novembre 2025
