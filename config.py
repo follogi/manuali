@@ -52,11 +52,17 @@ MAX_SOURCES_PER_TUTORIAL = 10
 
 # Base paths
 BASE_DIR = Path(__file__).parent
-CHROMA_DB_PATH = str(BASE_DIR / "chroma_db")
-UPLOADS_PATH = str(BASE_DIR / "uploads")
-STATIC_PATH = str(BASE_DIR / "static")
-PDF_JS_PATH = str(BASE_DIR / "static" / "pdf.js")
-EXPORT_PATH = str(BASE_DIR / "export")
+VENV_DIR = BASE_DIR / "venv"
+DATA_DIR = VENV_DIR / "data"
+LOG_DIR = VENV_DIR / "logs"
+
+# Ensure venv directory exists (won't populate it with a real virtualenv)
+os.makedirs(DATA_DIR, exist_ok=True)
+CHROMA_DB_PATH = str(DATA_DIR / "chroma_db")
+UPLOADS_PATH = str(DATA_DIR / "uploads")
+STATIC_PATH = str(DATA_DIR / "static")
+PDF_JS_PATH = str(DATA_DIR / "static" / "pdf.js")
+EXPORT_PATH = str(DATA_DIR / "export")
 
 # Crea le cartelle se non esistono
 for path in [CHROMA_DB_PATH, UPLOADS_PATH, STATIC_PATH, EXPORT_PATH]:
@@ -94,9 +100,10 @@ MAX_FILES_PER_UPLOAD = 10
 # ==============================================================================
 
 LOG_LEVEL = "INFO"
-LOG_FILE = str(BASE_DIR / "app.log")
+os.makedirs(LOG_DIR, exist_ok=True)
+LOG_FILE = str(LOG_DIR / "app.log")
 ENABLE_CITATION_AUDIT_LOG = True
-CITATION_AUDIT_LOG = str(BASE_DIR / "citations_audit.log")
+CITATION_AUDIT_LOG = str(LOG_DIR / "citations_audit.log")
 
 # Log format
 LOG_FORMAT = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
