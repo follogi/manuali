@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Tutorial Generator RAG - Entry Point
-Avvia Flask + Gradio per applicazione completa.
+Avvia server Gradio per applicazione completa.
 
 Usage:
     python main.py
@@ -15,17 +15,9 @@ import sys
 import logging
 import argparse
 
-try:
-    from flask import Flask
-    from flask_cors import CORS
-except ImportError:
-    print("Error: Flask not installed. Install with: pip install flask flask-cors")
-    sys.exit(1)
-
 import config
 from rag_engine import RAGEngine
 from llm_handler import TutorialGenerator
-from pdf_viewer import PDFViewer
 from gradio_ui import GradioUI
 
 # Setup logging
@@ -100,27 +92,6 @@ def check_prerequisites() -> bool:
     return all_ok
 
 
-def create_flask_app() -> Flask:
-    """
-    Crea e configura Flask app.
-
-    Returns:
-        Flask app configurata
-    """
-    app = Flask(__name__)
-
-    # CORS
-    if config.ENABLE_CORS:
-        CORS(app)
-
-    # Configurazione
-    app.config['MAX_CONTENT_LENGTH'] = config.MAX_FILE_SIZE_MB * 1024 * 1024
-
-    logger.info("Flask app creata")
-
-    return app
-
-
 def main():
     """Entry point principale."""
     # Parse args
@@ -177,15 +148,7 @@ def main():
         tutorial_generator = TutorialGenerator()
         logger.info("    ✓ Tutorial Generator pronto")
 
-        logger.info("3/4 Inizializzazione Flask app...")
-        flask_app = create_flask_app()
-
-        # Registra PDF viewer routes
-        pdf_viewer = PDFViewer()
-        pdf_viewer.create_flask_routes(flask_app)
-        logger.info("    ✓ Flask app pronta")
-
-        logger.info("4/4 Inizializzazione Gradio UI...")
+        logger.info("3/4 Inizializzazione Gradio UI...")
         gradio_ui = GradioUI(rag_engine, tutorial_generator)
         interface = gradio_ui.create_interface()
         logger.info("    ✓ Gradio UI pronta")
@@ -195,24 +158,24 @@ def main():
         logger.exception("Stack trace:")
         sys.exit(1)
 
-    # Avvia server
+    # Avvia server Gradio
     try:
         logger.info("\n" + "="*70)
         logger.info("Avvio server...")
         logger.info("="*70)
 
-        # Monta Gradio su Flask usando mount_gradio_app
-        import gradio as gr
-        app = gr.mount_gradio_app(flask_app, interface, path="/")
-
         logger.info(f"\n✅ Server pronto!")
         logger.info(f"\n🌐 Apri nel browser:")
         logger.info(f"   → http://localhost:{args.port}")
-        if config.FLASK_HOST == "0.0.0.0":
+
+        # Calcola IP locale
+        try:
             import socket
             hostname = socket.gethostname()
             local_ip = socket.gethostbyname(hostname)
             logger.info(f"   → http://{local_ip}:{args.port}")
+        except:
+            pass
 
         logger.info(f"\n📚 Documentazione:")
         logger.info(f"   Upload manuali → Tab 'Carica Documenti'")
@@ -235,11 +198,13 @@ def main():
         logger.info(f"\n🛑 Per fermare: Ctrl+C\n")
         logger.info("="*70 + "\n")
 
-        # Avvia server Flask (con Gradio montato)
-        app.run(
-            host=config.FLASK_HOST,
-            port=args.port,
-            debug=args.debug or config.DEBUG
+        # Avvia server Gradio (standalone)
+        interface.launch(
+            server_name=config.FLASK_HOST,
+            server_port=args.port,
+            share=args.share,
+            debug=args.debug or config.DEBUG,
+            show_error=True
         )
 
     except KeyboardInterrupt:

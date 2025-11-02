@@ -22,13 +22,12 @@ Un'applicazione web completa per creare tutorial interattivi basata su RAG (Retr
 
 | Componente | Tecnologia |
 |------------|------------|
-| **Frontend** | Gradio 4.32 |
-| **Backend** | Flask 3.0 + Python 3.10+ |
+| **Frontend/Backend** | Gradio 4.32 + Python 3.10+ |
 | **LLM** | Ollama + Mistral 7B |
 | **RAG Framework** | LlamaIndex |
 | **Embedding** | all-MiniLM-L6-v2 (HuggingFace) |
 | **Vector DB** | Chroma (persistente) |
-| **PDF Processing** | PyPDF + PDF.js |
+| **PDF Processing** | PyPDF |
 
 ---
 
