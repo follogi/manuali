@@ -31,6 +31,11 @@ CHUNK_OVERLAP = 50
 TOP_K_RETRIEVAL = 5
 MIN_RELEVANCE_THRESHOLD = 0.3
 
+# Diversificazione risultati
+ENABLE_RESULT_DIVERSIFICATION = True  # Bilancia tra relevance e diversity
+DIVERSIFICATION_PENALTY = 0.3  # Penalty per chunk dallo stesso documento (0-1)
+MAX_CHUNKS_PER_DOCUMENT = 2  # Max chunk da stesso documento nei risultati
+
 # ==============================================================================
 # Source Tracking & Verification
 # ==============================================================================
