@@ -391,7 +391,7 @@ class GradioUI:
         verify_citations: bool
     ) -> str:
         """Handler per generazione tutorial."""
-        if not question or len(question.strip()) < 5:
+        if (not question or len(question.strip()) < 5) and not use_last_search:
             return config.ERROR_MESSAGES['query_empty']
 
         try:
