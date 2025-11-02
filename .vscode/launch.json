@@ -1,0 +1,89 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "🚀 Debug: Main App",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/main.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "env": {
+                "PYTHONUNBUFFERED": "1"
+            },
+            "args": [],
+            "autoReload": {
+                "enable": true
+            }
+        },
+        {
+            "name": "🐛 Debug: Main App (Skip Checks)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/main.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "env": {
+                "PYTHONUNBUFFERED": "1"
+            },
+            "args": [
+                "--skip-checks"
+            ]
+        },
+        {
+            "name": "🔬 Debug: RAG Engine Only",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/rag_engine.py",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "🤖 Debug: LLM Handler Only",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/llm_handler.py",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "✅ Debug: Citation Verifier",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/citation_verifier.py",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "📄 Debug: PDF Viewer",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/pdf_viewer.py",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "⚙️ Debug: Config Test",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/config.py",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "🔗 Debug: Attach to Running App",
+            "type": "debugpy",
+            "request": "attach",
+            "connect": {
+                "host": "localhost",
+                "port": 5678
+            },
+            "pathMappings": [
+                {
+                    "localRoot": "${workspaceFolder}",
+                    "remoteRoot": "."
+                }
+            ]
+        }
+    ]
+}
