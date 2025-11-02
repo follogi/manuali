@@ -246,16 +246,23 @@ class RAGEngine:
         logger.info(f"Query: '{question}' (top_k={top_k})")
 
         try:
-            # Usa retriever invece di query_engine (non serve LLM)
+            # Recupera più risultati del necessario per diversificazione
+            if config.ENABLE_RESULT_DIVERSIFICATION:
+                # Recupera 3x per avere scelta
+                retrieval_k = top_k * 3
+            else:
+                retrieval_k = top_k
+
+            # Usa retriever invece of query_engine (non serve LLM)
             retriever = self.index.as_retriever(
-                similarity_top_k=top_k
+                similarity_top_k=retrieval_k
             )
 
             # Execute retrieval (solo similarity search, no LLM)
             nodes = retriever.retrieve(question)
 
             # Extract results with metadata
-            results = []
+            all_results = []
 
             for node in nodes:
                 chunk_text = node.node.text
@@ -264,9 +271,17 @@ class RAGEngine:
 
                 # Filter by threshold
                 if similarity_score >= config.MIN_RELEVANCE_THRESHOLD:
-                    results.append((chunk_text, metadata, similarity_score))
+                    all_results.append((chunk_text, metadata, similarity_score))
 
-            logger.info(f"Query completata: {len(results)} risultati rilevanti")
+            # Diversifica risultati se abilitato
+            if config.ENABLE_RESULT_DIVERSIFICATION and len(all_results) > top_k:
+                results = self._diversify_results(all_results, top_k)
+            else:
+                results = all_results[:top_k]
+
+            # Log con conteggio documenti diversi
+            unique_docs = len(set(r[1].get('source_file', '') for r in results))
+            logger.info(f"Query completata: {len(results)} risultati da {unique_docs} documenti diversi")
             return results
 
         except Exception as e:
@@ -313,6 +328,74 @@ class RAGEngine:
     # ========================================================================
     # Private Methods
     # ========================================================================
+
+    def _diversify_results(
+        self,
+        all_results: List[Tuple[str, Dict, float]],
+        top_k: int
+    ) -> List[Tuple[str, Dict, float]]:
+        """
+        Diversifica risultati bilanciando relevance e diversity per documento.
+
+        Algoritmo:
+        1. Seleziona chunk con score più alto
+        2. Per prossimi chunk, applica penalty se dallo stesso documento
+        3. Continua fino a raggiungere top_k risultati
+
+        Args:
+            all_results: Tutti i risultati ordinati per relevance
+            top_k: Numero di risultati finali desiderati
+
+        Returns:
+            Lista diversificata di top_k risultati
+        """
+        if len(all_results) <= top_k:
+            return all_results
+
+        diversified = []
+        doc_count = {}  # Conta chunk per documento
+
+        for chunk_text, metadata, score in all_results:
+            source_file = metadata.get('source_file', 'unknown')
+
+            # Conta chunk già selezionati da questo documento
+            count = doc_count.get(source_file, 0)
+
+            # Applica penalty se già abbiamo chunk da questo documento
+            if count > 0:
+                penalty = config.DIVERSIFICATION_PENALTY * count
+                adjusted_score = score * (1 - penalty)
+            else:
+                adjusted_score = score
+
+            # Aggiungi a lista con score aggiustato
+            diversified.append((chunk_text, metadata, adjusted_score, score))  # score originale come ultimo elemento
+
+        # Riordina per adjusted score
+        diversified.sort(key=lambda x: x[2], reverse=True)
+
+        # Seleziona top_k rispettando max_chunks_per_document
+        final_results = []
+        doc_count = {}
+
+        for chunk_text, metadata, adjusted_score, original_score in diversified:
+            source_file = metadata.get('source_file', 'unknown')
+            count = doc_count.get(source_file, 0)
+
+            # Controlla limite per documento
+            if count < config.MAX_CHUNKS_PER_DOCUMENT:
+                final_results.append((chunk_text, metadata, original_score))  # Usa score originale
+                doc_count[source_file] = count + 1
+
+                if len(final_results) >= top_k:
+                    break
+
+        logger.debug(
+            f"Diversificazione: da {len(all_results)} risultati a {len(final_results)}, "
+            f"{len(doc_count)} documenti diversi"
+        )
+
+        return final_results
 
     def _validate_file(self, file_path: str) -> Dict[str, Any]:
         """Valida file prima dell'upload."""
