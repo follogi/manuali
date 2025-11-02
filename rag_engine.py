@@ -70,6 +70,10 @@ class RAGEngine:
         Settings.chunk_size = config.CHUNK_SIZE
         Settings.chunk_overlap = config.CHUNK_OVERLAP
 
+        # IMPORTANTE: Disabilita LLM di default (usiamo solo embeddings per RAG)
+        # L'LLM (Ollama) viene usato solo in llm_handler.py per generazione tutorial
+        Settings.llm = None
+
         # Initialize Chroma DB
         self.chroma_client = chromadb.PersistentClient(path=config.CHROMA_DB_PATH)
 
@@ -242,18 +246,18 @@ class RAGEngine:
         logger.info(f"Query: '{question}' (top_k={top_k})")
 
         try:
-            # Create query engine
-            query_engine = self.index.as_query_engine(
+            # Usa retriever invece di query_engine (non serve LLM)
+            retriever = self.index.as_retriever(
                 similarity_top_k=top_k
             )
 
-            # Execute query
-            response = query_engine.query(question)
+            # Execute retrieval (solo similarity search, no LLM)
+            nodes = retriever.retrieve(question)
 
             # Extract results with metadata
             results = []
 
-            for node in response.source_nodes:
+            for node in nodes:
                 chunk_text = node.node.text
                 metadata = node.node.metadata
                 similarity_score = node.score if hasattr(node, 'score') else 0.0
