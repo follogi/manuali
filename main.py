@@ -195,21 +195,15 @@ def main():
         logger.exception("Stack trace:")
         sys.exit(1)
 
-    # Monta Gradio su Flask
+    # Avvia server
     try:
         logger.info("\n" + "="*70)
         logger.info("Avvio server...")
         logger.info("="*70)
 
-        # Mount Gradio app on Flask
-        app = interface.mount_app(flask_app, path="/")
-
-        # Configurazione server
-        server_config = {
-            'host': config.FLASK_HOST,
-            'port': args.port,
-            'debug': args.debug or config.DEBUG
-        }
+        # Monta Gradio su Flask usando mount_gradio_app
+        import gradio as gr
+        app = gr.mount_gradio_app(flask_app, interface, path="/")
 
         logger.info(f"\n✅ Server pronto!")
         logger.info(f"\n🌐 Apri nel browser:")
@@ -241,8 +235,12 @@ def main():
         logger.info(f"\n🛑 Per fermare: Ctrl+C\n")
         logger.info("="*70 + "\n")
 
-        # Avvia server
-        flask_app.run(**server_config)
+        # Avvia server Flask (con Gradio montato)
+        app.run(
+            host=config.FLASK_HOST,
+            port=args.port,
+            debug=args.debug or config.DEBUG
+        )
 
     except KeyboardInterrupt:
         logger.info("\n\n🛑 Server fermato dall'utente")
